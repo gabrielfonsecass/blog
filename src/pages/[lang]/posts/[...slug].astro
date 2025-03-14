@@ -5,6 +5,7 @@ import { getLangFromUrl } from "~/i18n/utils"
 import MainLayout from "~/layouts/main.astro"
 import "~/styles/post.css"
 import "~/styles/post.scss"
+import TableOfContents from '~/components/astro/TableOfContents.astro';
 import { formatDate, getPostsByLocale } from "~/types/utils"
 
 export async function getStaticPaths() {
@@ -37,6 +38,8 @@ const { Content } = await render(post)
         {formatDate(post.data.pubDate)}
       </div>
     </div>
+
+    <TableOfContents content={post} />
 
     <div class="my-6">
       <Content />

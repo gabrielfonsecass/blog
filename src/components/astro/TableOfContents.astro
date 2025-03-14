@@ -1,0 +1,52 @@
+---
+import { CirclePlus, CircleX } from "lucide-react";
+
+const { content } = Astro.props;
+
+const extractHeadings = (markdown: any) => {
+  const cleanedMarkdown = markdown.replace(/```[\s\S]*?```/g, "");
+  const regex = /^(#{1,6})\s+(.+)$/gm;
+  const headings = [];
+  let match;
+
+  while ((match = regex.exec(cleanedMarkdown)) !== null) {
+    const level = match[1].length;
+    const title = match[2];
+    // Remover apenas a interrogação e trocar os espaços por hífens
+    const id = title.toLowerCase().replace(/\s+/g, "-").replace(/[?():,]/g, "").replace(/[\p{Emoji}]/gu, "");
+    headings.push({ level, title, id });
+  }
+
+  return headings;
+};
+
+const headings = extractHeadings(content.body);
+---
+
+<nav class="menu">
+  <h3 id="toggle-menu">
+    <span id="menu-icon"><CirclePlus /></span> Navegar pelos tópicos
+  </h3>
+  <ul>
+    {headings.map((heading) => (
+      <li style={`margin-left: ${heading.level * 10}px;`}>
+        <a href={`#${heading.id}`}>{heading.title}</a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const nav = document.querySelector(".menu");
+    const toggleBtn = document.querySelector("#toggle-menu");
+    const iconContainer = document.querySelector("#menu-icon");
+
+    toggleBtn.addEventListener("click", () => {
+      nav.classList.toggle("ativo");
+      iconContainer.innerHTML = nav.classList.contains("ativo")
+        ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>`
+        : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>`;
+    });
+  });
+</script>

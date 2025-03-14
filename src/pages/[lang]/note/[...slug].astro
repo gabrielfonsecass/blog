@@ -6,7 +6,7 @@ import MainLayout from "~/layouts/main.astro"
 import "~/styles/post.css"
 import "~/styles/post.scss"
 import { formatDate, getNotesByLocale } from "~/types/utils"
-
+import TableOfContents from '~/components/astro/TableOfContents.astro';
 export async function getStaticPaths() {
   const allPaths = []
 
@@ -37,6 +37,8 @@ const { Content } = await render(note)
         {formatDate(note.data.pubDate)}
       </div>
     </div>
+
+    <TableOfContents content={note} />
 
     <div class="my-6">
       <Content />

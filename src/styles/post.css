@@ -14,3 +14,75 @@ article code::after {
   content: none !important;
 }
  
+nav.menu {
+  position: fixed;
+  z-index: 100;
+  border-left: 5px solid #c9c9c9;
+  border-top: 5px solid #c9c9c9;
+  border-right: 5px solid #c9c9c9;
+  background: #fff;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  border-radius: 20px 20px 0 0;
+  padding: 0;
+  margin: 0;
+  transition: all 0.5s ease;
+  top: calc(100% - 48px);
+  height:48px;
+  h3 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1em;
+    padding: 10px 0;
+    cursor: pointer;
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  ul {
+    height: calc(100% - 48px);
+    overflow-y: scroll;
+    padding-left: 0;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    li {
+      list-style: none;
+      padding: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+      background: #dddddd;
+      padding: 10px 20px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      line-height: 150%;
+      font-size: 16px;
+    }
+  }
+}
+nav.menu.ativo {
+  top: 30%;
+  height:70%;
+}
+
+.dark nav.menu {
+  background: #2d2d2d;
+  border:none;
+  top: calc(100% - 45px);
+  height:45px;
+  ul {
+    height: calc(100% - 45px);
+  }
+  li {
+    background: #474747;
+  }
+}
+
+.dark nav.menu.ativo {
+  top: 30%;
+  height:70%;
+}
