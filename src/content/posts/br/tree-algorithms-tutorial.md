@@ -12,7 +12,7 @@ Métodos como árvores de decisão, random forest e gradient boosting são ampla
 
 Este tutorial tem como objetivo ajudar iniciantes a aprender algoritmos baseados em árvores do zero. Após concluí-lo com sucesso, espera-se que os indivíduos se tornem proficientes no uso desses algoritmos e na construção de modelos preditivos.
 
-#### Objetivos desse tutorial:
+**Objetivos desse tutorial:**
 - Compreender como classificar imagens de gestos manuais usando VGG-19
 - Aprender a pré-processar conjuntos de dados de imagens personalizados para deep learning
 - Adquirir habilidades na construção e treinamento de um modelo de aprendizado por transferência
