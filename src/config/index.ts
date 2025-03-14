@@ -41,6 +41,7 @@ export const br = {
     ...common.meta,
     title: "Gabriel Fonseca",
     description: "Tentando entender o mundo através do Machine Learning",
+    slogan: "Tentando entender o mundo através do Machine Learning"
   },
   navigation: {
     ...common.navigation,
