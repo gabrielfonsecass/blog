@@ -2,7 +2,7 @@ import { getCollection } from "astro:content"
 
 export const formatDate = (
   date: Date | string | undefined,
-  format: string = "YYYY-MM-DD",
+  format: string = "DD/MM/YYYY",
 ): string => {
   const validDate = date ? new Date(date) : new Date()
 
