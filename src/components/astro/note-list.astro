@@ -6,17 +6,11 @@ interface Props {
 }
 
 const { note, lang, dateFormat = "default" } = Astro.props
-import { formatDate } from "~/types/utils"
 ---
 
 <a
   href={`/${lang}/note/${note?.id}/`}
   class="my-3 visited:text-purple-500/90 md:my-2"
 >
-  <p
-    class={`w-full flex-shrink-0 truncate text-gray-500 dark:text-gray-400 text-sm`}
-  >
-    <time>{formatDate(note?.data.pubDate, dateFormat)}</time>
-  </p>
   <p class="line-clamp-2 text-lg hover:underline">{note?.data.title}</p>
 </a>
