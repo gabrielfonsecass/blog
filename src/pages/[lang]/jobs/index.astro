@@ -15,28 +15,35 @@ export function getStaticPaths() {
 
 const jobs = await getJobsByLocale(lang)
 
-const jobsByYear = jobs.reduce(
+const jobsByCategory = jobs.reduce(
   (acc: Record<string, any[]>, job: any) => {
-    const year = new Date(job.data.pubDate).getFullYear().toString()
-    if (!acc[year]) {
-      acc[year] = []
+    const category = job.data.category || "Sem Categoria"
+    if (!acc[category]) {
+      acc[category] = []
     }
-    acc[year].push(job)
+    acc[category].push(job)
     return acc
   },
   {} as Record<string, any[]>,
 )
 
-const years = Object.keys(jobsByYear).sort((a, b) => Number(b) - Number(a))
+const categories = Object.keys(jobsByCategory).sort()
 ---
 
-<MainLayout title={pageMeta.jobs.title} description={pageMeta.jobs.description}>
+<MainLayout
+  title={pageMeta.jobs.title}
+  description={pageMeta.jobs.description}
+>
   {
-    years.map((year) => (
-      <div class="year-group my-8">
-        <h2 class="my-4 text-2xl font-bold">{year}</h2>
-        {jobsByYear[year].map((job: any) => (
-          <JobList job={job} lang={lang} dateFormat="DD/MM/YYYY"/>
+    categories.map((category) => (
+      <div class="category-group my-8">
+        <h2 class="my-4 text-2xl font-bold">{category}</h2>
+        {jobsByCategory[category].map((job: any) => (
+          <JobList
+            job={job}
+            lang={lang}
+            dateFormat="DD/MM/YYYY"
+          />
         ))}
       </div>
     ))

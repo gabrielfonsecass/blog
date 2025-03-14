@@ -5,18 +5,12 @@ interface Props {
   dateFormat?: string
 }
 
-const { job, lang, dateFormat = "default"} = Astro.props
-import { formatDate } from "~/types/utils"
+const { job, lang} = Astro.props
 ---
-
 <a
-  href={`/${lang}/job/${job?.id}/`}
+  href={job?.data.externalLink && job?.data.externalLink !== "" ? job?.data.externalLink : `/${lang}/job/${job?.id}/`}
+  
   class="my-3 visited:text-purple-500/90 md:my-2"
 >
-  <p
-    class={`text-sm truncate text-gray-500 dark:text-gray-400`}
-  >
-    <time>{formatDate(job?.data.pubDate, dateFormat)}</time>
-  </p>
   <p class="line-clamp-2 text-lg hover:underline">{job?.data.title}</p>
 </a>
