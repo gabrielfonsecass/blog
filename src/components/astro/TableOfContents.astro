@@ -37,16 +37,27 @@ const headings = extractHeadings(content.body);
 </nav>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener('astro:page-load', () => {
     const nav = document.querySelector(".menu");
     const toggleBtn = document.querySelector("#toggle-menu");
     const iconContainer = document.querySelector("#menu-icon");
 
+    if (toggleBtn && nav && iconContainer) {
     toggleBtn.addEventListener("click", () => {
       nav.classList.toggle("ativo");
       iconContainer.innerHTML = nav.classList.contains("ativo")
         ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>`
         : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>`;
     });
+
+    document.addEventListener("click", (e) => {
+      const target = e.target as Node; // Asserção de tipo
+      if (!nav.contains(target) && !toggleBtn.contains(target)) {
+        nav.classList.remove("ativo");
+        iconContainer.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>`;
+      }
+      
+    });
+  }
   });
 </script>
