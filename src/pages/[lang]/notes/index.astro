@@ -15,19 +15,19 @@ export function getStaticPaths() {
 
 const notes = await getNotesByLocale(lang)
 
-const notesByYear = notes.reduce(
+const notesByCategory = notes.reduce(
   (acc: Record<string, any[]>, note: any) => {
-    const year = new Date(note.data.pubDate).getFullYear().toString()
-    if (!acc[year]) {
-      acc[year] = []
+    const category = note.data.category || "Sem Categoria"
+    if (!acc[category]) {
+      acc[category] = []
     }
-    acc[year].push(note)
+    acc[category].push(note)
     return acc
   },
   {} as Record<string, any[]>,
 )
 
-const years = Object.keys(notesByYear).sort((a, b) => Number(b) - Number(a))
+const categories = Object.keys(notesByCategory).sort()
 ---
 
 <MainLayout
@@ -35,10 +35,10 @@ const years = Object.keys(notesByYear).sort((a, b) => Number(b) - Number(a))
   description={pageMeta.notes.description}
 >
   {
-    years.map((year) => (
-      <div class="year-group my-8">
-        <h2 class="my-4 text-2xl font-bold">{year}</h2>
-        {notesByYear[year].map((note: any) => (
+    categories.map((category) => (
+      <div class="category-group my-8">
+        <h2 class="my-4 text-2xl font-bold">{category}</h2>
+        {notesByCategory[category].map((note: any) => (
           <NoteList
             note={note}
             lang={lang}
