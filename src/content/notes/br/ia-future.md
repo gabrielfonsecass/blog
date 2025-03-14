@@ -1,12 +1,13 @@
 ---
 title: "Futuros da IA"
+category: "Inteligência Artificial"
 pubDate: 2025-03-13
 description: "O risco da IA gerado por atores humanos deliberados (isto é, concentração de poder) parece ser maior do que o risco de uso não intencional (isto é, perda de controle). "
 author: "Gabriel Fonseca"
 tags: ["AGI", "AI", "DeepLearning"]
 ---
 
-## 🤖 Reflexões sobre AGI
+## 🤖 Reflexões sobre AGI 
 - **Definição interessante de AGI**: sistemas de IA que podem substituir completamente o trabalho humano (ou ter um impacto comparável).
 - O risco da IA gerado por atores humanos deliberados (isto é, concentração de poder) parece ser maior do que o risco de uso não intencional (isto é, perda de controle). [Veja alguns dos riscos (muito bem analisados por sinal) [Aqui](https://cdn.openai.com/openai-preparedness-framework-beta.pdf)]
   - **Observação**: o risco da AGI ainda pode ser alto - o uso malicioso pode facilmente ser pior do que o uso acidental.
