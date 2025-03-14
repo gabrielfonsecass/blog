@@ -19,7 +19,7 @@ Este tutorial tem como objetivo ajudar iniciantes a aprender algoritmos baseados
 - Desenvolver a capacidade de avaliar o desempenho de um modelo de classificação de imagens
 
 ## O que é uma Árvore de Decisão? Como ela funciona?
-![Modelagem baseada em árvores em R e Python](/images/posts/post-1/image1.webp)
+![Modelagem baseada em árvores em R e Python](/images/posts/tree-algorithms-tutorial/image1.webp)
 *Modelagem baseada em árvores em R e Python*
 
 ### Exemplo
@@ -29,7 +29,7 @@ Nesse problema, precisamos separar os alunos que jogam queimada no tempo livre c
 
 É aqui que o ML baseado em árvores ajuda. Ele segmentará os alunos com base em todos os valores das três variáveis e identificará aquela que cria os conjuntos mais homogêneos de alunos (que, ao mesmo tempo, sejam heterogêneos entre si). No exemplo abaixo, podemos ver que a variável Gênero consegue identificar os conjuntos mais homogêneos em comparação com as outras duas variáveis.
 
-![Amostragem](/images/posts/post-1/image2.png)
+![Amostragem](/images/posts/tree-algorithms-tutorial/image2.png)
 
 Como mencionado acima, a árvore de decisão identifica a variável mais significativa e seu valor, que resultam nos conjuntos mais homogêneos da população. Agora, a questão que surge é: como ela identifica a variável e o ponto de divisão? Para isso, a árvore de decisão utiliza diversos algoritmos, que discutiremos na próxima seção.
 
@@ -67,7 +67,7 @@ Esses são os termos comumente usados para árvores de decisão em Python. Como 
 ## Árvores de Regressão vs Árvores de Classificação
 Todos sabemos que os nós terminais (ou folhas) estão localizados na parte inferior dos classificadores baseados em árvore de decisão. Isso significa que as árvores de decisão geralmente são desenhadas de cabeça para baixo, com as folhas na parte inferior e as raízes na parte superior (como mostrado abaixo).
 
-![Árvores de Regressão vs Árvores de Classificação](/images/posts/post-1/image3.png)
+![Árvores de Regressão vs Árvores de Classificação](/images/posts/tree-algorithms-tutorial/image3.png)
 
 ### As Principais Diferenças e Semelhanças entre Árvores de Classificação e Regressão
 - Usamos árvores de regressão quando a variável dependente é contínua e usamos classificadores baseados em árvores de decisão quando a variável dependente é categórica.
@@ -149,14 +149,14 @@ Gera classificadores baseados em árvores chamados **CHAID** (Chi-square Automat
 **Divisão pela Turma:**
 Execute os mesmos passos de cálculo para a divisão pela **Turma** e você chegará à tabela abaixo.
 
-![Divisão pela Turma](/images/posts/post-1/image4.webp)
+![Divisão pela Turma](/images/posts/tree-algorithms-tutorial/image4.webp)
 
 Acima, podemos ver que o Chi-Square também identifica que a divisão pelo **Gênero** é mais significativa em comparação com a divisão pela **Turma**.
 
 ### Ganho de Informação
 Observe a imagem abaixo e pense: qual nó pode ser descrito de forma mais simples? Tenho certeza de que sua resposta é **C**, porque ele exige menos informação, já que todos os valores são semelhantes. Por outro lado, **B** exige mais informação para ser descrito e **A** exige a máxima quantidade de informação. Em outras palavras, podemos dizer que **C** é um nó **Puro**, **B** é menos impuro e **A** é mais impuro.
 
-![Árvores Baseadas em Modelos](/images/posts/post-1/image5.webp)
+![Árvores Baseadas em Modelos](/images/posts/tree-algorithms-tutorial/image5.webp)
 
 Agora, podemos concluir que um nó menos impuro exige menos informação para ser descrito. E um nó mais impuro exige mais informação. A teoria da informação é uma medida para definir esse grau de desorganização em um sistema, conhecida como **Entropia**. Se a amostra é completamente homogênea, a entropia é zero, e se a amostra estiver igualmente dividida (50% – 50%), a entropia será um.
 
@@ -305,7 +305,7 @@ Os parâmetros usados para definir uma árvore são explicados abaixo. Os parâm
 Como discutido anteriormente, a técnica de definir restrições é uma abordagem gananciosa. Em outras palavras, ela verifica a melhor divisão instantaneamente e segue em frente até que uma das condições de parada especificadas seja atingida. Vamos considerar o seguinte caso quando você está dirigindo:
 
 
-![Carros](/images/posts/post-1/image6.png)
+![Carros](/images/posts/tree-algorithms-tutorial/image6.png)
 
 - Existem 2 faixas:
   - Uma faixa com carros a 80 km/h
