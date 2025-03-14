@@ -20,10 +20,9 @@ export async function getStaticPaths() {
     ...jobs.map(job => ({ params: { route: job.id } })),
   ];
 
-  // Retornar o formato correto com `paths` e `fallback`
   return {
-    paths, // paths precisa ser um array
-    fallback: false, // ou 'true' dependendo do seu caso
+    paths,  // paths é o array de rotas
+    fallback: false, // ou 'true', dependendo do comportamento que você deseja
   };
 }
 
