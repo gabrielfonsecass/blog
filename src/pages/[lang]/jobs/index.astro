@@ -1,0 +1,44 @@
+---
+import JobList from "~/components/astro/job-list.astro"
+import { en, br } from "~/config"
+import { getLangFromUrl } from "~/i18n/utils"
+import MainLayout from "~/layouts/main.astro"
+import { getJobsByLocale } from "~/types/utils"
+import { getLanguagePaths } from "~/types/utils/langs"
+
+const lang = getLangFromUrl(Astro.url)
+const pageMeta = lang === "br" ? br.pageMeta : en.pageMeta
+
+export function getStaticPaths() {
+  return getLanguagePaths()
+}
+
+const jobs = await getJobsByLocale(lang)
+
+const jobsByYear = jobs.reduce(
+  (acc: Record<string, any[]>, job: any) => {
+    const year = new Date(job.data.pubDate).getFullYear().toString()
+    if (!acc[year]) {
+      acc[year] = []
+    }
+    acc[year].push(job)
+    return acc
+  },
+  {} as Record<string, any[]>,
+)
+
+const years = Object.keys(jobsByYear).sort((a, b) => Number(b) - Number(a))
+---
+
+<MainLayout title={pageMeta.jobs.title} description={pageMeta.jobs.description}>
+  {
+    years.map((year) => (
+      <div class="year-group my-8">
+        <h2 class="my-4 text-2xl font-bold">{year}</h2>
+        {jobsByYear[year].map((job: any) => (
+          <JobList job={job} lang={lang} dateFormat="MM-DD" dateWidth="w-20" />
+        ))}
+      </div>
+    ))
+  }
+</MainLayout>

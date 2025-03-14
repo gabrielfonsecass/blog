@@ -1,0 +1,78 @@
+---
+import { getLangFromUrl, useTranslations } from "~/i18n/utils"
+import MainLayout from "~/layouts/main.astro"
+import PostList from "./post-list.astro"
+import NoteList from "./note-list.astro"
+import JobList from "./job-list.astro"
+
+interface Props {
+  posts: any[]
+  notes: any[]
+  jobs: any[]
+  tag: string
+}
+
+const { posts, notes, jobs, tag } = Astro.props
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+const filteredPosts = posts.filter((post: any) => post.data.tags?.includes(tag))
+const filteredNotes = notes.filter((note: any) => note.data.tags?.includes(tag))
+const filteredJobs = jobs.filter((job: any) => job.data.tags?.includes(tag))
+---
+
+<MainLayout>
+  <div class="my-9 mt-2 text-2xl font-semibold">#{tag}</div>
+
+  {
+    filteredPosts.length > 0 ? (
+      <ul class="space-y-4">
+        {filteredPosts.map((post: any) => (
+          <PostList
+            post={post}
+            lang={lang}
+            dateFormat="YYYY-MM-DD"
+            dateWidth="w-32"
+          />
+        ))}
+      </ul>
+    ) : (
+      <p class="text-gray-500">{t("tag.no_posts")}</p>
+    )
+  }
+
+  {
+    filteredNotes.length > 0 ? (
+      <ul class="space-y-4">
+        {filteredNotes.map((post: any) => (
+          <PostList
+            post={post}
+            lang={lang}
+            dateFormat="YYYY-MM-DD"
+            dateWidth="w-32"
+          />
+        ))}
+      </ul>
+    ) : (
+      <p class="text-gray-500">{t("tag.no_notes")}</p>
+    )
+  }
+
+  {
+    filteredJobs.length > 0 ? (
+      <ul class="space-y-4">
+        {filteredJobs.map((job: any) => (
+          <JobList
+            job={job}
+            lang={lang}
+            dateFormat="YYYY-MM-DD"
+            dateWidth="w-32"
+          />
+        ))}
+      </ul>
+    ) : (
+      <p class="text-gray-500">{t("tag.no_jobs")}</p>
+    )
+  }
+</MainLayout>

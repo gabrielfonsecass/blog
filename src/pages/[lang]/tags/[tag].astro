@@ -1,0 +1,42 @@
+---
+import TagComponent from "~/components/astro/tag.astro"
+import { langs } from "~/i18n/ui"
+import { getPostsByLocale, getNotesByLocale, getJobsByLocale } from "~/types/utils"
+
+export interface Props {
+  posts: any
+  notes: any
+  jobs: any
+  tag: string
+}
+
+export async function getStaticPaths() {
+  const paths = await Promise.all(
+    langs.map(async (lang) => {
+      const posts = await getPostsByLocale(lang)
+      const notes = await getNotesByLocale(lang)
+      const jobs = await getJobsByLocale(lang)
+      const uniqueTags = [
+        ...new Set([
+          ...posts.flatMap((post: any) => post.data.tags || []),
+          ...notes.flatMap((note: any) => note.data.tags || []),
+          ...jobs.flatMap((job: any) => job.data.tags || []),
+      ]),
+    ]
+      return uniqueTags.map((tag) => ({
+        params: { tag, lang },
+        props: {
+          posts,
+          notes,
+          jobs,
+          tag,
+        },
+      }))
+    }),
+  )
+
+  return paths.flat()
+}
+---
+
+<TagComponent {...Astro.props} />

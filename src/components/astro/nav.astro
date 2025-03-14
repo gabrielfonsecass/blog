@@ -1,0 +1,80 @@
+---
+import { en, br } from "~/config"
+import { getLangFromUrl, useTranslations } from "~/i18n/utils"
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+const { home, notes, blog, jobs, about } =
+  lang === "br" ? br.navigation : en.navigation
+---
+
+<div
+  class="mt-4 mb-10 flex gap-4 overflow-x-auto text-lg whitespace-nowrap [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+>
+  {
+    home && (
+      <a
+        href={`/${lang}`}
+        class="hover:underline hover:underline-offset-4"
+        aria-label={t("nav.home")}
+        title={t("nav.home")}
+        data-astro-prefetch="viewport"
+      >
+        <p>{t("nav.home")}</p>
+      </a>
+    )
+  }
+  {
+    notes && (
+      <a
+        href={`/${lang}/notes`}
+        class="hover:underline hover:underline-offset-4"
+        aria-label={t("nav.notes")}
+        title={t("nav.notes")}
+        data-astro-prefetch="viewport"
+      >
+        <p>{t("nav.notes")}</p>
+      </a>
+    )
+  }
+  {
+    blog && (
+      <a
+        href={`/${lang}/blog`}
+        class="hover:underline hover:underline-offset-4"
+        aria-label={t("nav.blog")}
+        title={t("nav.blog")}
+        data-astro-prefetch="viewport"
+      >
+        <p>{t("nav.blog")}</p>
+      </a>
+    )
+  }
+  {
+    jobs && (
+      <a
+        href={`/${lang}/jobs`}
+        class="hover:underline hover:underline-offset-4"
+        aria-label={t("nav.jobs")}
+        title={t("nav.jobs")}
+        data-astro-prefetch="viewport"
+      >
+        <p>{t("nav.jobs")}</p>
+      </a>
+    )
+  }
+  {
+    about && (
+      <a
+        href={`/${lang}/about`}
+        class="hover:underline hover:underline-offset-4"
+        aria-label={t("nav.about")}
+        title={t("nav.about")}
+        data-astro-prefetch="viewport"
+      >
+        <p>{t("nav.about")}</p>
+      </a>
+    )
+  }
+</div>

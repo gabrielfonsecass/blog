@@ -1,0 +1,52 @@
+---
+import NoteList from "~/components/astro/note-list.astro"
+import { en, br } from "~/config"
+import { getLangFromUrl } from "~/i18n/utils"
+import MainLayout from "~/layouts/main.astro"
+import { getNotesByLocale } from "~/types/utils"
+import { getLanguagePaths } from "~/types/utils/langs"
+
+const lang = getLangFromUrl(Astro.url)
+const pageMeta = lang === "br" ? br.pageMeta : en.pageMeta
+
+export function getStaticPaths() {
+  return getLanguagePaths()
+}
+
+const notes = await getNotesByLocale(lang)
+
+const notesByYear = notes.reduce(
+  (acc: Record<string, any[]>, note: any) => {
+    const year = new Date(note.data.pubDate).getFullYear().toString()
+    if (!acc[year]) {
+      acc[year] = []
+    }
+    acc[year].push(note)
+    return acc
+  },
+  {} as Record<string, any[]>,
+)
+
+const years = Object.keys(notesByYear).sort((a, b) => Number(b) - Number(a))
+---
+
+<MainLayout
+  title={pageMeta.notes.title}
+  description={pageMeta.notes.description}
+>
+  {
+    years.map((year) => (
+      <div class="year-group my-8">
+        <h2 class="my-4 text-2xl font-bold">{year}</h2>
+        {notesByYear[year].map((note: any) => (
+          <NoteList
+            note={note}
+            lang={lang}
+            dateFormat="MM-DD"
+            dateWidth="w-20"
+          />
+        ))}
+      </div>
+    ))
+  }
+</MainLayout>

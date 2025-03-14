@@ -1,0 +1,45 @@
+---
+import { common } from "../../config"
+import { getLangFromUrl, useTranslations } from "../../i18n/utils"
+import {
+  getPostsByLocale,
+  getNotesByLocale,
+  getJobsByLocale,
+} from "../../types/utils"
+import PostList from "./post-list.astro"
+import NoteList from "./note-list.astro"
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+const allPosts = await getPostsByLocale(lang)
+const allNotes = await getNotesByLocale(lang)
+const allJobs = await getJobsByLocale(lang)
+const posts = allPosts.slice(0, common.latestPosts)
+const notes = allNotes.slice(0, common.latestNotes)
+const jobs = allJobs.slice(0, common.latestJobs)
+---
+
+<div class="my-8 text-xl font-medium md:my-8">{t("blog.latest")}</div>
+{
+  posts.map((post: any) => (
+    <PostList
+      post={post}
+      lang={lang}
+      dateFormat="YYYY-MM-DD"
+      dateWidth="w-32"
+    />
+  ))
+}
+
+<div class="my-8 text-xl font-medium md:my-8">{t("notes.latest")}</div>
+{
+  notes.map((note: any) => (
+    <NoteList
+      note={note}
+      lang={lang}
+      dateFormat="YYYY-MM-DD"
+      dateWidth="w-32"
+    />
+  ))
+}

@@ -1,0 +1,58 @@
+---
+import { render } from "astro:content"
+import { langs } from "~/i18n/ui"
+import { getLangFromUrl } from "~/i18n/utils"
+import MainLayout from "~/layouts/main.astro"
+import "~/styles/post.css"
+import "~/styles/post.scss"
+import { formatDate, getNotesByLocale } from "~/types/utils"
+
+export async function getStaticPaths() {
+  const allPaths = []
+
+  for (const lang of langs) {
+    const notes = await getNotesByLocale(lang)
+    const paths = notes.map((note: any) => ({
+      params: { lang, slug: note.id },
+      props: { note },
+    }))
+    allPaths.push(...paths)
+  }
+
+  return allPaths
+}
+
+const lang = getLangFromUrl(Astro.url)
+
+const { note } = Astro.props
+
+const { Content } = await render(note)
+---
+
+<MainLayout {...note.data}>
+  <article class="prose w-full max-w-3xl overflow-hidden dark:prose-invert">
+    <div class="flex flex-col gap-2">
+      <h2 class="!my-0 text-3xl font-semibold">{note.data.title}</h2>
+      <div class="my-3 text-gray-500 dark:text-white/80">
+        {formatDate(note.data.pubDate)}
+      </div>
+    </div>
+
+    <div class="my-6">
+      <Content />
+    </div>
+
+    <div class="space-x-3 pb-10 text-sm text-gray-500">
+      {
+        note.data.tags.map((tag: string) => (
+          <a href={`/${lang}/tags/${tag}`} class="no-underline">
+            <p class="inline-block hover:scale-105">#{tag}</p>
+          </a>
+        ))
+      }
+    </div>
+  </article>
+
+  <div class="my-10">
+  </div>
+</MainLayout>

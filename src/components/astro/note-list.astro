@@ -1,0 +1,23 @@
+---
+interface Props {
+  note: any
+  lang: string
+  dateFormat?: string
+  dateWidth?: string
+}
+
+const { note, lang, dateFormat = "default", dateWidth = "w-36" } = Astro.props
+import { formatDate } from "~/types/utils"
+---
+
+<a
+  href={`/${lang}/note/${note?.id}/`}
+  class="my-3 flex visited:text-purple-500/90 md:my-2"
+>
+  <p
+    class={`flex ${dateWidth} flex-shrink-0 truncate text-gray-500 dark:text-gray-400`}
+  >
+    <time>{formatDate(note?.data.pubDate, dateFormat)}</time>
+  </p>
+  <p class="line-clamp-2 text-lg hover:underline">{note?.data.title}</p>
+</a>

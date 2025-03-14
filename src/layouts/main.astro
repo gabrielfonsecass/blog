@@ -1,0 +1,17 @@
+---
+import Header from "~/components/astro/header.astro"
+import Navigation from "~/components/astro/nav.astro"
+import BaseLayout from "~/layouts/base.astro"
+
+const { title, description } = Astro.props
+const filename = Astro.url.pathname.split("/").filter(Boolean).pop() ?? ""
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="max-auto mb-10 w-full max-w-3xl">
+    <Header />
+    <Navigation />
+    <slot />
+    <div class="mt-20"></div>
+  </main>
+</BaseLayout>
