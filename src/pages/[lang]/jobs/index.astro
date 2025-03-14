@@ -36,7 +36,7 @@ const years = Object.keys(jobsByYear).sort((a, b) => Number(b) - Number(a))
       <div class="year-group my-8">
         <h2 class="my-4 text-2xl font-bold">{year}</h2>
         {jobsByYear[year].map((job: any) => (
-          <JobList job={job} lang={lang} dateFormat="DD/MM/YYYY" dateWidth="w-25" />
+          <JobList job={job} lang={lang} dateFormat="DD/MM/YYYY"/>
         ))}
       </div>
     ))
