@@ -2,8 +2,9 @@
 import { defaultLanguage } from "~/config";
 import { getPostsByLocale, getNotesByLocale, getJobsByLocale } from "~/types/utils";
 
+// Definir o tipo para `params`
 interface Params {
-    route: string;
+  route: string;
 }
 
 // Função para gerar as rotas possíveis
@@ -12,16 +13,17 @@ export async function getStaticPaths() {
   const notes = await getNotesByLocale(defaultLanguage);
   const jobs = await getJobsByLocale(defaultLanguage);
 
-  // Coletar todas as IDs dos posts, notas e empregos
+  // Criar a lista de paths
   const paths = [
     ...posts.map(post => ({ params: { route: post.id } })),
     ...notes.map(note => ({ params: { route: note.id } })),
     ...jobs.map(job => ({ params: { route: job.id } })),
   ];
 
+  // Retornar o formato correto com `paths` e `fallback`
   return {
-    paths,
-    fallback: false, // ou true, dependendo do seu caso
+    paths, // paths precisa ser um array
+    fallback: false, // ou 'true' dependendo do seu caso
   };
 }
 
@@ -44,6 +46,6 @@ export async function get({ params }: { params: Params }) {
   }
 
   return {
-    body: JSON.stringify(page.data), // ou qualquer outro formato de resposta que você precise
+    body: JSON.stringify(page.data),
   };
 }
