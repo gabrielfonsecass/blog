@@ -156,7 +156,7 @@ Acima, podemos ver que o Chi-Square também identifica que a divisão pelo **Gê
 ### Ganho de Informação
 Observe a imagem abaixo e pense: qual nó pode ser descrito de forma mais simples? Tenho certeza de que sua resposta é **C**, porque ele exige menos informação, já que todos os valores são semelhantes. Por outro lado, **B** exige mais informação para ser descrito e **A** exige a máxima quantidade de informação. Em outras palavras, podemos dizer que **C** é um nó **Puro**, **B** é menos impuro e **A** é mais impuro.
 
-![Árvores Baseadas em Modelos](/images/posts/post-1/image4.webp)
+![Árvores Baseadas em Modelos](/images/posts/post-1/image5.webp)
 
 Agora, podemos concluir que um nó menos impuro exige menos informação para ser descrito. E um nó mais impuro exige mais informação. A teoria da informação é uma medida para definir esse grau de desorganização em um sistema, conhecida como **Entropia**. Se a amostra é completamente homogênea, a entropia é zero, e se a amostra estiver igualmente dividida (50% – 50%), a entropia será um.
 
