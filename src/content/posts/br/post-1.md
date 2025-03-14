@@ -1,5 +1,5 @@
 ---
-title: "Algoritmos Baseados em Árvores: Tutorial em R e Python"
+title: "(Em construção) Algoritmos Baseados em Árvores: Tutorial em R e Python"
 pubDate: 2025-03-13
 description: "Métodos como árvores de decisão, random forest e gradient boosting são amplamente utilizados em diversos problemas de ciência de dados. Por isso, é fundamental que todo analista (inclusive iniciantes) aprenda esses algoritmos e os utilize na modelagem."
 author: "Gabriel Fonseca"
