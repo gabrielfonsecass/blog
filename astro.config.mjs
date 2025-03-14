@@ -5,6 +5,8 @@ import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-s
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers"
 import tailwindcss from "@tailwindcss/vite"
 import expressiveCode from "astro-expressive-code"
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 import { defineConfig } from "astro/config"
 
 import robotsTxt from "astro-robots-txt"
@@ -19,6 +21,11 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+  },
+
+  markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
   },
 
   integrations: [
